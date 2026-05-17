@@ -1,0 +1,31 @@
+{
+  "cli": {
+    "version": ">= 3.0.0",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "production": {
+      "ios": {
+        "autoIncrement": false,
+        "credentialsSource": "remote"
+      },
+      "android": {
+        "autoIncrement": false,
+        "credentialsSource": "remote"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "ios": {
+        "simulator": false
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "ascAppId": "1616593368"
+      }
+    }
+  }
+}

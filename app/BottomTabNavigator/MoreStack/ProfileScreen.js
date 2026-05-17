@@ -359,6 +359,176 @@ const ProfileScreen = props => {
                 </Text>
               </View>
             </View>
+            {/* Subscription Status */}
+            <View
+              style={StyleSheet.applyWidth(
+                {
+                  backgroundColor: 'rgba(255,255,255,0.08)',
+                  borderRadius: 12,
+                  marginBottom: 12,
+                  marginLeft: 20,
+                  marginRight: 20,
+                  padding: 16,
+                },
+                dimensions.width
+              )}
+            >
+              <View
+                style={StyleSheet.applyWidth(
+                  {
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: 6,
+                  },
+                  dimensions.width
+                )}
+              >
+                <Text
+                  accessible={true}
+                  selectable={false}
+                  style={StyleSheet.applyWidth(
+                    {
+                      color: palettes.App['Custom Color'],
+                      fontFamily: 'Rasa_500Medium',
+                      fontSize: 18,
+                      opacity: 0.7,
+                    },
+                    dimensions.width
+                  )}
+                >
+                  {'Membership'}
+                </Text>
+                <View
+                  style={StyleSheet.applyWidth(
+                    {
+                      backgroundColor: isSubscribed(Variables)
+                        ? '#2ECC71'
+                        : isFreeMembership(Variables)
+                        ? 'rgba(255,255,255,0.2)'
+                        : '#E67E22',
+                      borderRadius: 6,
+                      paddingHorizontal: 10,
+                      paddingVertical: 3,
+                    },
+                    dimensions.width
+                  )}
+                >
+                  <Text
+                    accessible={true}
+                    selectable={false}
+                    style={StyleSheet.applyWidth(
+                      {
+                        color: palettes.App['Custom Color'],
+                        fontFamily: 'Rasa_600SemiBold',
+                        fontSize: 13,
+                        letterSpacing: 0.5,
+                      },
+                      dimensions.width
+                    )}
+                  >
+                    {isSubscribed(Variables)
+                      ? 'ACTIVE'
+                      : isFreeMembership(Variables)
+                      ? 'FREE'
+                      : 'CANCELLED'}
+                  </Text>
+                </View>
+              </View>
+              <Text
+                accessible={true}
+                selectable={false}
+                style={StyleSheet.applyWidth(
+                  {
+                    color: palettes.App['Custom Color'],
+                    fontFamily: 'Rasa_400Regular',
+                    fontSize: 16,
+                  },
+                  dimensions.width
+                )}
+              >
+                {Constants['PROFILE_DETAILS']?.subscription_type === 'free'
+                  ? 'Free Plan'
+                  : (() => {
+                      const entitlements =
+                        Constants['CUSTOMER_INFO']?.entitlements?.active || {};
+                      const keys = Object.keys(entitlements);
+                      if (keys.length > 0) {
+                        const productId =
+                          entitlements[keys[0]]?.productIdentifier || '';
+                        if (
+                          productId.toLowerCase().includes('annual') ||
+                          productId.toLowerCase().includes('yearly')
+                        ) {
+                          return 'Annual Plan';
+                        }
+                        return 'Monthly Plan';
+                      }
+                      return 'Premium Plan';
+                    })()}
+              </Text>
+              <>
+                {!(
+                  isSubscribed(Variables) &&
+                  Object.keys(
+                    Constants['CUSTOMER_INFO']?.entitlements?.active || {}
+                  ).length > 0 &&
+                  Constants['CUSTOMER_INFO']?.entitlements?.active[
+                    Object.keys(
+                      Constants['CUSTOMER_INFO']?.entitlements?.active
+                    )[0]
+                  ]?.expirationDate
+                ) ? null : (
+                  <Text
+                    accessible={true}
+                    selectable={false}
+                    style={StyleSheet.applyWidth(
+                      {
+                        color: palettes.App['Custom Color'],
+                        fontFamily: 'Rasa_300Light',
+                        fontSize: 14,
+                        marginTop: 4,
+                        opacity: 0.7,
+                      },
+                      dimensions.width
+                    )}
+                  >
+                    {'Renews ' +
+                      new Date(
+                        Constants['CUSTOMER_INFO']?.entitlements?.active[
+                          Object.keys(
+                            Constants['CUSTOMER_INFO']?.entitlements?.active
+                          )[0]
+                        ]?.expirationDate
+                      ).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                  </Text>
+                )}
+              </>
+              <>
+                {!(!isSubscribed(Variables) &&
+                  !isFreeMembership(Variables)) ? null : (
+                  <Text
+                    accessible={true}
+                    selectable={false}
+                    style={StyleSheet.applyWidth(
+                      {
+                        color: '#E67E22',
+                        fontFamily: 'Rasa_400Regular',
+                        fontSize: 14,
+                        marginTop: 4,
+                      },
+                      dimensions.width
+                    )}
+                  >
+                    {'Your subscription has ended. Resubscribe to restore access.'}
+                  </Text>
+                )}
+              </>
+            </View>
             {/* Update Profile */}
             <Pressable
               onPress={() => {
