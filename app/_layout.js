@@ -147,15 +147,15 @@ function DefaultAndroidBackIcon({ tintColor }) {
 const styles = StyleSheet.create({});
 
 import FlashMessage from 'react-native-flash-message';
-import { TrackPlayer } from './custom-files/Media';
-import { MediaPlayer } from './custom-files/Media';
-import ModalFeatureAnnouncement from './custom-files/ModalFeatureAnnouncement';
+import { TrackPlayer } from '../custom-files/Media';
+import { MediaPlayer } from '../custom-files/Media';
+import ModalFeatureAnnouncement from '../custom-files/ModalFeatureAnnouncement';
 import appsFlyer from 'react-native-appsflyer';
-import ModalPaywallBlock from './components/ModalPaywallBlock';
+import ModalPaywallBlock from '../components/ModalPaywallBlock';
 import { OneSignal } from 'react-native-onesignal';
 import * as NavigationBar from 'expo-navigation-bar';
 import * as ExpoStatusBar from 'expo-status-bar';
-import TesterBanner from './custom-files/TesterBanner';
+import TesterBanner from '../custom-files/TesterBanner';
 
 if (Platform.OS === 'android' && Platform.Version >= 33) {
   CommonPackages.ReactNativeForegroundService.register({
@@ -169,7 +169,7 @@ if (Platform.OS === 'android' && Platform.Version >= 33) {
 }
 
 if (Platform.OS !== 'web') {
-  TrackPlayer.registerPlaybackService(() => require('./custom-files/services'));
+  TrackPlayer.registerPlaybackService(() => require('../custom-files/services'));
 }
 
 const App = () => {
