@@ -14,7 +14,7 @@
         "NSPhotoLibraryAddUsageDescription": "Allow photo access to update your profile picture.",
         "NSAdvertisingAttributionReportEndpoint": "https://appsflyer-skadnetwork.com/"
       },
-      "buildNumber": "1.87.0",
+      "buildNumber": "5.551.0",
       "supportsTablet": true,
       "usesAppleSignIn": true,
       "bundleIdentifier": "com.pikwxwpq5b1i.plgj6rakapp",
@@ -178,7 +178,7 @@
       ]
     ],
     "privacy": "unlisted",
-    "version": "1.87.0",
+    "version": "5.551.0",
     "platforms": [
       "ios",
       "android",
